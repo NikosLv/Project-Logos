@@ -1,0 +1,5 @@
+body{
+
+	background-image:url("first.jpg");
+	background-repeat: inherit; 
+	height:500px;
