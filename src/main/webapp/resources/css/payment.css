@@ -1,0 +1,10 @@
+body{
+
+	background-image:url("pay.jpg");
+	background-repeat: inherit; 
+	height:500px;
+}
+container{
+	width:1300px;
+	height:700px;
+}
