@@ -12,7 +12,10 @@ public interface UserMapper {
 
 	public static User toSecurityUser(com.logos.entity.User user) {
 		// user.getEmail()
-		return new User(user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList(String.valueOf(user.getRole())));
+		return new User(
+				user.getEmail(), 
+				user.getPassword(), 
+				AuthorityUtils.createAuthorityList(String.valueOf(user.getRole())));
 	}
 	
 	public static com.logos.entity.User registerRequestToUser(AddUserRequest request) {
@@ -51,8 +54,8 @@ public interface UserMapper {
 		if(request.getRole().equals(UserRole.ROLE_ADMIN)) {
 		user.setRole(UserRole.ROLE_ADMIN);
 		} else {
-			user.setRole(UserRole.ROLE_ADMIN);
-		}
+				user.setRole(UserRole.ROLE_USER);
+			}
 		
 		userProfile.setId(request.getId());
 		userProfile.setFirstName(request.getFirstName());

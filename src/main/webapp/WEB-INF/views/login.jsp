@@ -32,7 +32,7 @@ Remember Me: <input type="checkbox" name="rememberMe"> <br>
                             <fieldset>
                             	<form:form action="/login" method="POST">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="text" >
+                                    <input class="form-control" placeholder="E-mail" name="email" type="email" >
                                 </div>
                                 
                                 

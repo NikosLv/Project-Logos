@@ -5,13 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="../resources/css/products.css">
+<link rel="stylesheet" href="../resources/css/products.css"> 
 
 <title>Products by page</title>
 </head>
 <body>
 
-	<c:url var="firstUrl" value="/product/products-by-page?page=0&size=10" />
+	<c:url var="firstUrl" value="/product/products-by-page?page=0" />
 	<!---------------------------------------------->
 	<c:url var="lastUrl"
 		value="/product/products-by-page?page=${ brandList.totalPages }" />
@@ -82,8 +82,10 @@
 						<th>Photo</th>
 						<th>Price</th>
 						<th>Date download</th>
+						<th></th>
         				<th></th>
         				<th></th>
+        				
 
 					</tr>
 				</thead>
@@ -93,7 +95,7 @@
 
 						<c:forEach items="${ brand.products }" var="product">
 							<tr>
-								<td>${ brand.id }
+								<td>${ product.id }
 								<td>${ brand.markName }</td>
 								<td>${ product.nameGoods }</td>
 								<td>${ product.bodyType }</td>
@@ -104,9 +106,10 @@
 								<td>${ product.imageUrl }</td>
 								<td>${ product.price }</td>
 								<td>${ product.dateDownload }</td>
+								<th><a href="/product/prodId/${product.id }">Detalis</a></th>
     							<th><a href="/product/edit-prod/${product.id }">Edit</a></th>
-        						<th><a href="/product/delete/${ product.id}">Delete</a></th>
-
+        						<th><a href="/product/delete/${product.id}">Delete</a></th>
+        						
 							</tr>
 						</c:forEach>
 					</c:forEach>

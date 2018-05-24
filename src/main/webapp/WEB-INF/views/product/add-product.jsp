@@ -13,6 +13,9 @@
 		modelAttribute="productModel" 
 		method="POST"
 		enctype="multipart/form-data">
+		
+		
+		
 	<fieldset>
 		<legend>Add New Product</legend>
 		
@@ -20,6 +23,7 @@
 			<label class="col-md-4 control-label" for="textinput">Product name:</label>
 			<div class="col-md-5">
 				<form:input path="nameGoods" cssClass="form-control input-md" placeholder="Product name" />
+				<form:errors path="nameGoods" cssClass="error"/>
 			</div>
 		</div>
 		
@@ -31,6 +35,7 @@
 		    <form:select path="bodyType" cssClass="form-control">
 				<form:options items="${ bodyTypeList }"/>		    
 		    </form:select>
+		   <!--   <form:errors path="bodyType" cssClass="error"/> -->
 		  	</div>
 		 </div>
 		  
@@ -38,6 +43,7 @@
 			<label class="col-md-4 control-label" for="textinput">Description:</label>
 			<div class="col-md-5">
 				<form:textarea path="description" cssClass="form-control input-md" placeholder="Description" />
+				<form:errors path="description" cssClass="error"/>
 			</div>
 		</div>
 		
@@ -46,9 +52,10 @@
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="selectbasic">Select unit</label>
 		  <div class="col-md-5">
-		    <form:select path="unit" cssClass="form-control">
+		     <form:select path="unit" cssClass="form-control"> 
 				<form:options items="${ unitList }"/>		    
 		    </form:select>
+		  <!--  <form:errors path="unit" cssClass="error"/>  -->
 		  </div>
 		 </div>
 		 
@@ -60,6 +67,7 @@
 		    <form:select path="availability" cssClass="form-control">
 				<form:options items="${ availabilityList }"/>		    
 		    </form:select>
+		   <!--   <form:errors path="availability" cssClass="error"/>  -->
 		  </div>
 		 </div>
 		 
@@ -71,6 +79,7 @@
 		    <form:select path="producer" cssClass="form-control">
 				<form:options items="${ producerList }"/>		    
 		    </form:select>
+		  <!--   <form:errors path="producer" cssClass="error"/>  -->
 		  </div>
 		 </div>
 		 
@@ -79,6 +88,7 @@
 			<label class="col-md-4 control-label" for="textinput">Price:</label>
 			<div class="col-md-5">
 				<form:input path="price" cssClass="form-control input-md" placeholder="Price" />
+				<form:errors path="price" cssClass="error"/>
 			</div>
 		</div>
 		 						 
@@ -90,15 +100,18 @@
 		    <form:select path="brand" cssClass="form-control">
 				<form:options items="${ brandList }" itemLabel="markName"/>		    
 		    </form:select>
+		   <!--   <form:errors path="brand" cssClass="error"/> -->
 		  </div>
 		</div>
 		
-		<div class="form-group">
+	  	<div class="form-group">
 		  <label class="col-md-4 control-label" for="textinput">Add image</label>
 			<div class="col-md-5">
 				<input type="file" name="productImage"> 
+				
 			</div>
 		</div>
+		
 				
 				
 	    <!-- Button -->

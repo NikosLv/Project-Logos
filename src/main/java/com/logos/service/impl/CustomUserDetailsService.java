@@ -19,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		System.out.println("User name: " + email);
 		User user = userRepository.findUserByEmail(email);
-		if(user == null ) throw new UsernameNotFoundException("User not found");
+		if(user == null ) throw new UsernameNotFoundException("User is not registered");
 		return UserMapper.toSecurityUser(user);
 	}
 	

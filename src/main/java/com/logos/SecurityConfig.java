@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true)
 			.and()
 				.authorizeRequests()
-				.antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+				.antMatchers("/user/**").hasAnyRole("USER", "ADMIN")
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().permitAll()
 			.and()

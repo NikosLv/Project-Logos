@@ -51,16 +51,21 @@
 	</sec:authorize>
 	
 	<sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal.username" var="username"/>
-	     			<li><a href="/user/profile">${username}</a></li>
+	
+		<sec:authentication property="principal.username" var="username"/>
+	     <li><a href="/user/profile">${username}</a></li>
+		
 		<sec:authorize access="hasRole('ADMIN')">
 			<li><a href="/dashboard">Dashboard</a></li>
 		</sec:authorize>
+		
 		<sec:authorize access="hasAnyRole('USER')">
 			<li><a href="/product/productsall">Products</a></li>
 		</sec:authorize>
 		
+		
 		<c:url var="logoutUrl" value="/logout" />
+		
 		<form:form action="${logoutUrl}" method="POST" cssStyle="padding-top: 7px;">
 			<li><input type="submit" value="Log Out" class="btn btn-danger"></li>
 		</form:form>

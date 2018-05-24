@@ -5,10 +5,10 @@
 
 </c:if>
 
-<form:form action="/product/edit-prod/{productId}" method="post"
+<form:form action="/product/edit-prod" method="post"
 	modelAttribute="editProdModel" cssClass="form-horizontal">
 
-	  <input type="hidden" name="productId" value="${productModel.id}"> 
+	<!--    <input type="hidden" name="productId" value="${productModel.id}">  --> 
 
 
 

@@ -13,15 +13,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@CheckPasswordMatch (message = "your password is false!")
+@CheckPasswordMatch //(message = "your password is false!")
 public class AddUserRequest {
 
-	@NotEmpty 
-	private String login;
+	//@NotEmpty 
+	//private String login;
 	
 	
 	@NotEmpty 
-	//@CheckIfEmailExists (message = "This mail is registred")
+	@CheckIfEmailExists 
 	private String email;
 	
 	@NotEmpty 

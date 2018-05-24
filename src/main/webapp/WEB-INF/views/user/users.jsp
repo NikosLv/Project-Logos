@@ -3,7 +3,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="../resources/css/products.css">
+<!--  <link rel="stylesheet" href="../resources/css/products.css">-->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>

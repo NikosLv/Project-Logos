@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.logos.entity.enums.UserRole;
 import com.logos.validator.CheckIfEmailExists;
@@ -26,19 +28,23 @@ import com.logos.validator.CheckIfEmailExists;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity
 @Table(name = "user", indexes = @Index(columnList = "email"))
 @NoArgsConstructor
 @Getter @Setter
-
+@ToString(callSuper=true)
 public class User extends BaseEntity {
 
-	@CheckIfEmailExists
-	@Column(name = "email", nullable = false, unique = true) 
+	@NotNull(message = "Field email can't be null")
+	
+	@Size(min=5, max=30, message="Write your email between 5 and 30")
+	@Column(name = "email") 
 	private String email;
 	
+	@NotNull(message = "Field password can't be null") 
 	private String password;
 	
 	@Enumerated(EnumType.ORDINAL)

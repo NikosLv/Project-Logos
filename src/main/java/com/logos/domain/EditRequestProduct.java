@@ -31,6 +31,6 @@ public class EditRequestProduct {
 	
 	private BigDecimal price;
 
-	private String imageUrl;
+	//private String imageUrl;
 
 }

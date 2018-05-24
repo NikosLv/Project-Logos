@@ -1,8 +1,11 @@
 package com.logos.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +21,12 @@ import com.logos.service.EmailService;
 import com.logos.service.UserService;
 import com.logos.service.utils.RandomToken;
 
+import lombok.extern.log4j.Log4j2;
+
+
+
 @Controller
+@Log4j2
 public class HomeController {
 
 	@Autowired
@@ -42,6 +50,7 @@ public class HomeController {
 		return "/register";
 	}
 
+	
 	@PostMapping("/register")
 	public String registerUser(@ModelAttribute("registerModel") AddUserRequest request, Model model) {
 
@@ -54,21 +63,35 @@ public class HomeController {
 			user.setToken(token);
 
 			userService.saveUser(user);
-
-//			Mail mail = new Mail();
-//			mail.setTo(request.getEmail());
-//			mail.setSubject("You are registrired in our shop <<Detal Auto>>!");
-//			mail.setContent("Please verify your email adress by link: " + "http://localhost:8080/verify?token=" + token
-//					+ "&userid=" + user.getId());
-//			emailService.sendMessage(mail);
+			Mail mail = new Mail();
+			mail.setTo(request.getEmail());
+			mail.setSubject("You are registrired in our shop <<Detal Auto>>!");
+			mail.setContent("Please verify your email adress by link: " + "http://localhost:8080/verify?token=" + token
+					+ "&userid=" + user.getId());
+			emailService.sendMessage(mail);
 
 		} else {
 			model.addAttribute("registerModel", new AddUserRequest());
 			return "/register";
 		}
 		return "redirect:/";
+	
+//		if(br.hasErrors()) {
+//			 return "/register";
+//		} 
+//		User user = UserMapper.registerRequestToUser(request);
+//		String token = RandomToken.generateToken();
+//
+//		System.out.println("Token" + token);
+//		user.setToken(token);
+//		userService.saveUser(user);
+//		model.addAttribute("registerModel", new AddUserRequest());
+//		return "/register";
+	
 	}
-
+	
+	
+	
 	@GetMapping("/verify")
 	public String verifyEmail(@RequestParam("token") String token, @RequestParam("userid") String userId) {
 

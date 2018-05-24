@@ -23,14 +23,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.logos.domain.EditRequestProduct;
 import com.logos.domain.SimpleFilter;
 import com.logos.entity.Product;
+import com.logos.entity.User;
 import com.logos.mapper.ProductMapper;
 import com.logos.entity.Brand;
+import com.logos.entity.Order;
 import com.logos.service.ProductService;
 import com.logos.service.cloudinary.CloudinaryService;
 import com.logos.service.BrandService;
+import com.logos.service.OrderService;
 
 @Controller
-@SessionAttributes({"brands"})
+@SessionAttributes({"brandList"})
 @RequestMapping("/product")
 public class ProductController {
 	
@@ -39,12 +42,14 @@ public class ProductController {
 	private BrandService brandService;
 	private ProductService productService;
 	private CloudinaryService cloudinaryService;
+	private OrderService orderService;
 	
 	@Autowired
-	public ProductController(CloudinaryService cloudinaryService, BrandService brandService, ProductService productService) {
+	public ProductController(OrderService orderService, CloudinaryService cloudinaryService, BrandService brandService, ProductService productService) {
 		this.cloudinaryService = cloudinaryService;
 		this.brandService = brandService;
 		this.productService = productService;
+		this.orderService=orderService;
 	}
 	
 //	@GetMapping//("/")
@@ -82,21 +87,19 @@ public class ProductController {
 	public String saveProduct(
 			@Valid 
 			@ModelAttribute("productModel") com.logos.entity.Product product,
-			@RequestParam("productImage") MultipartFile file) {
-		
+			@RequestParam("productImage") MultipartFile file, BindingResult br) {
+		if(br.hasErrors()) {
+			return "product/add-product";
+		};
 		productService.saveProduct(product);
 		String imageUrl = cloudinaryService.uploadFile(file, "product/" + product.getId());
 		product.setImageUrl(imageUrl);
 		productService.saveProduct(product);
+		//return "product/add-product";
 		return "product/add-product";
 	}
 	
-//	@GetMapping("/productsall")
-//	public String showAllProductsall(Model model) {
-//		model.addAttribute("brandList", brandService.findAllBrands());
-//		return "product/productsall";
-//	}
-	
+
 	@GetMapping("/productsall")
 	public String showAllProductsall(Model model, @PageableDefault Pageable pageable) {
 		model.addAttribute("brandList", brandService.findAllBrands());
@@ -158,7 +161,7 @@ public class ProductController {
 	}
 	
 	@GetMapping("/edit-prod/{productId}")
-	public String showEditProd(@PathVariable("productId")int productId, Model model) {
+	public String showEditProd(@PathVariable("productId")int productId, Model model, Principal principal) {
 		                           
 		Product product = productService.findProductById(productId);
 		
@@ -167,17 +170,34 @@ public class ProductController {
 	}
 
 	@PostMapping("/edit-prod")
-	public ModelAndView saveEditedProduct(@ModelAttribute("editProdModel") EditRequestProduct editRequestProduct) {
-
-		try {
-			productService.updateProduct(ProductMapper.editReuqestToProduct(editRequestProduct));
-		} catch (Exception e) {
-			return new ModelAndView("product/edit-prod", "error", "Oops ..Can't edit this product");
+	public ModelAndView saveEditedProduct(@ModelAttribute("editProdModel") EditRequestProduct editRequestProduct, BindingResult br) {
+		if (br.hasErrors()) {
+			return new ModelAndView("product/edit-prod");
 		}
-		return new ModelAndView("redirect:/product/products-by-page");
-
+		productService.updateProduct(ProductMapper.editReuqestToProduct(editRequestProduct));
+			return new ModelAndView("redirect:/product/products-by-page");
+	//		try {
+//			productService.updateProduct(ProductMapper.editReuqestToProduct(editRequestProduct));
+//		} catch (Exception e) {
+//			return new ModelAndView("product/edit-prod", "error", "Oops ..Can't edit this product");
+//		}
+//		return new ModelAndView("redirect:/product/products-by-page");
+	
 	}
 	
+	@GetMapping("/prodId/{productId}")
+	public String showProduct(Model model, @PathVariable("productId") int productId) {
+		
+		model.addAttribute("title", "Product Details");
+		Product product = productService.findProductById(productId);
+		model.addAttribute("productModel", product);
+		return "product/prodId";
+	}
+	
+	
+
+	
+
 
 	
 }

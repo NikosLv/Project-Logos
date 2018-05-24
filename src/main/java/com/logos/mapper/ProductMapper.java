@@ -15,6 +15,9 @@ public interface ProductMapper {
 		request.setAvailability(product.getAvailability());
 		request.setPrice(product.getPrice());
 		request.setId(product.getId());
+		request.setProducer(product.getProducer());
+	
+		
 		
 		return request;
 	}
@@ -29,7 +32,9 @@ public interface ProductMapper {
 		product.setUnit(request.getUnit());
 		product.setAvailability(request.getAvailability());
 		product.setPrice(request.getPrice());
-				
+		product.setProducer(request.getProducer());		
+		
+		
 		return product;
 	}	
 	

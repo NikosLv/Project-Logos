@@ -6,13 +6,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 	<form:form cssClass="form-horizontal" action="/order/add-order"
 		modelAttribute="orderModel" method="POST">
 		
-		
-		
+
+	
 		<fieldset>
 		<legend>Make order</legend>
+		
 		
 		<div class="form-group">
 		  <label class="col-md-4 control-label" for="selectbasic">Type of payment</label>
@@ -42,23 +45,33 @@
 		 </div>
 		 
 		 <div class="form-group">
-		  <label class="col-md-4 control-label" for="selectbasic">How product you buy?</label>
-		  	<div class="col-md-5">
-		    <form:select path="product" cssClass="form-control">
-				<form:options items="${ productList }"/>		    
-		    </form:select>
-		  	</div>
-		 </div>
+			<label class="col-md-4 control-label" for="textinput">Shipping address</label>
+			<div class="col-md-5">
+				<form:textarea path="address" cssClass="form-control input-md" placeholder="Address" />
+			</div>
+		</div>
 		 
+		 
+		 <form:input path="product"	value="${productModel.id }" type="hidden"/>
+		  
+		 
+		  
 		 <div class="form-group">
 			<label class="col-md-6 control-label"></label>
 			<div class="col-md-4">
-				<button type="submit" class="btn btn-warning">Make Order!</button>
+			<sec:authentication property="principal.username" var="username"/>
+			
+			
+				<button type="submit" class="btn btn-warning">Make order!</button>
+			
+			
+							     		
 			</div>
 		</div>
 		
 		</fieldset>
 	</form:form>
+
 	<a href="/product/productsall"><b>Back</b></a><br>
 </body>
 </html>
