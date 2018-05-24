@@ -64,7 +64,7 @@ public class OrderController {
 		order.setUser(user);
 		orderService.saveOrder(order);
 		return "redirect:/product/productsall";                               
-	}
+	} 
 	
 	@GetMapping("/user-order")
 	public String showOrder(Model model, @PathVariable("orderId")int orderId) {
