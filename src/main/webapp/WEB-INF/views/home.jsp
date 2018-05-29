@@ -11,11 +11,12 @@
 <body>
 
 
-	<div class="cotainer">
+	<div class="cotainer" id="home">
 		<div class="row" id="left">
 			<h3 style="color: #ffff00" align="left">
 				We sell spare parts for your car <br>and emotions for you.
 			</h3>
+		</div>
 		</div>
 </body>
 </html>

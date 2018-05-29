@@ -18,7 +18,7 @@ Remember Me: <input type="checkbox" name="rememberMe"> <br>
 	-->
 
 
-<h2 style="color:white" >Login page</h2>
+<h2 style="color:black" ><b>Login page</b></h2>
 <legend align="center" ></legend>
 
 <div class="col-md-4">

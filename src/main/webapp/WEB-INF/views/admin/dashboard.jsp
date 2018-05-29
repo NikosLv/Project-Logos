@@ -3,7 +3,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<legend align="center">Dashboard</legend><br>
+<legend align="center">Control panel</legend><br>
 
 
 <div class="container">
@@ -15,7 +15,7 @@
                     <small><b>MANAGEMENT</b></small>
                 </h5>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/product/add-brand">Add Brand</a></li>
                     <li><a href="/product/add-product">Add Product</a></li>
                      <li><a href="/product/products-by-page">List Products</a></li>

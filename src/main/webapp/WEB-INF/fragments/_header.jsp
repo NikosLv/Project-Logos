@@ -11,7 +11,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Detal auto</a>
+      <a class="navbar-brand" href="/">Detal auto</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,7 +20,11 @@
     <!-- left menu -->
     
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+      <sec:authorize access="!isAuthenticated()">
+      <sec:authorize access="hasRole('ANONYMOUS')">
+        <li><a href="/product/productsall">Shop</a></li>
+       </sec:authorize>
+       </sec:authorize>
         <li><a href="/contact">Contact</a></li>
         <li><a href="/payment-shipping">Payment and Shipping</a></li>
      
@@ -38,7 +42,7 @@
       
       <!-- right menu -------------------------------------->
       
- 	<ul class="nav navbar-nav navbar-right" style="width: 400px;">
+ 	<ul class="nav navbar-nav navbar-right" style="width: 500px;">
 			
 		
 		    
@@ -48,6 +52,7 @@
 		<li><a href="/login">Login</a></li>
 		<li class="divider"></li>
 		<li><a href="/register">Register</a></li> 
+		<!-- <li><a href="/product/productsall">Products</a></li> -->
 	</sec:authorize>
 	
 	<sec:authorize access="isAuthenticated()">
@@ -56,11 +61,12 @@
 	     <li><a href="/user/profile">${username}</a></li>
 		
 		<sec:authorize access="hasRole('ADMIN')">
-			<li><a href="/dashboard">Dashboard</a></li>
+			<li><a href="/admin/dashboard">Dashboard</a></li>
 		</sec:authorize>
 		
 		<sec:authorize access="hasAnyRole('USER')">
-			<li><a href="/product/productsall">Products</a></li>
+			<li><a href="/product/productsall">Purchases</a></li>
+			<li><a href="/order/orderId">My orders</a></li>
 		</sec:authorize>
 		
 		
@@ -72,8 +78,7 @@
 		
 	</sec:authorize>
 			
-			
-			
+		
 			
 			
 			

@@ -5,11 +5,12 @@
 <html>
 <head>
 <link rel="stylesheet" href="../resources/css/payment.css">
+<link rel="stylesheet" href="../resources/css/footer.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Payment</title>
 </head>
 <body>
-<div class="container">
+<div class="container" id="home">
 	<h3 color="white" align="right">
 	<p>All our products you can buy in our official stores.</p>
 <p>Also you can make an online order through our website.</p>

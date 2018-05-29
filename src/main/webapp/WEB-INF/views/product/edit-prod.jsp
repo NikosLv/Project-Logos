@@ -6,7 +6,7 @@
 </c:if>
 
 <form:form action="/product/edit-prod" method="post"
-	modelAttribute="editProdModel" cssClass="form-horizontal">
+	modelAttribute="editProdModel" cssClass="form-horizontal" enctype="multipart/form-data">
 
 	<!--    <input type="hidden" name="productId" value="${productModel.id}">  --> 
 
@@ -78,6 +78,24 @@
 					placeholder="Price" />
 			</div>
 		</div>
+		
+	<%-- 		 <div class="form-group">
+		  <label class="col-md-4 control-label" for="selectbasic">Select brand</label>
+		  <div class="col-md-5">
+		    <form:select path="brand" cssClass="form-control">
+				<form:options items="${ brandList }" itemLabel="markName"/>		    
+		    </form:select>
+		  
+		  </div> 
+		</div>--%>
+		
+		<div class="form-group">
+		  <label class="col-md-4 control-label" for="textinput">Add image</label>
+			<div class="col-md-5">
+				<input type="file" name="productImage"> 
+				
+			</div>
+		</div>
 
 
 		<div class="form-group">
@@ -99,5 +117,5 @@
 
 </form:form>
 <br>
-<a href="/dashboard">Back</a>
+<a href="/admin/dashboard">Back</a>
 <br>

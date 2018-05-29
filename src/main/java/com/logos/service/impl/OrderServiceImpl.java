@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.logos.entity.Order;
+import com.logos.entity.User;
 import com.logos.repository.OrderRepository;
 import com.logos.service.OrderService;
 
@@ -40,6 +41,11 @@ public class OrderServiceImpl implements OrderService {
 	public void updateOrder(Order order) {
 		orderRepository.save(order);
 		
+	}
+
+	@Override
+	public List<Order> findOrderByUser(User user) {
+		return orderRepository.findOrderByUser(user);
 	}
 
 }

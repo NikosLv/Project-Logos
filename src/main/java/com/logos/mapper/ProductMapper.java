@@ -16,8 +16,8 @@ public interface ProductMapper {
 		request.setPrice(product.getPrice());
 		request.setId(product.getId());
 		request.setProducer(product.getProducer());
-	
-		
+		request.setImageUrl(product.getImageUrl());
+		request.setBrand(product.getBrand());
 		
 		return request;
 	}
@@ -33,8 +33,8 @@ public interface ProductMapper {
 		product.setAvailability(request.getAvailability());
 		product.setPrice(request.getPrice());
 		product.setProducer(request.getProducer());		
-		
-		
+		product.setBrand(request.getBrand());
+		product.setImageUrl(request.getImageUrl());
 		return product;
 	}	
 	

@@ -6,16 +6,41 @@
 <title>${ title }</title>
 </head>
 <body>
-Order details:<br>
+<b>My Order details:</b><br><br>
 
+<table class="table table-bordered">
 
-							id:			${ orderModel.id }<br>
-							Payment:	${ orderModel.payment }<br>
-							Shipping:	${ orderModel.shipping }<br>
-							Packing:	${ orderModel.packing }<br>
-							Address:	${ orderModel.address }<br>
+<thead>
+							<tr>
+								<th>Order id</th>
+								<th>date of buy</th>
+								<th>payment</th>
+								<th>shipping</th>
+								
+								<th>Address</th>
+								<th>product name</th>
+								
+								<th><span class="glyphicon glyphicon-credit-card"></span></th>
 							
 								
-								
+							</tr>
+	</thead>						
+	<tbody>						
+	<c:forEach items="${ orderByUser }" var="order">
+		<tr>
+			<th>${ order.id }</th>
+			<th>${ order.createdAt }</th>
+			<th>${ order.payment }</th>
+			<th>${ order.shipping }</th>
+			
+			<th>${ order.address }</th>
+			<th>${ order.product.nameGoods }</th>
+			<th><a href="/order/pay">Pay</th>
+					
+		</tr>  
+		</c:forEach>  
+		</tbody>						
+</table>
+<a href="/product/productsall"><b>Pay other products</b></a>								
 </body>
 </html>

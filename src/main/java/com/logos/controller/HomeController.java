@@ -16,23 +16,21 @@ import com.logos.domain.AddUserRequest;
 import com.logos.entity.User;
 import com.logos.mail.Mail;
 import com.logos.mapper.UserMapper;
-
 import com.logos.service.EmailService;
 import com.logos.service.UserService;
 import com.logos.service.utils.RandomToken;
 
 import lombok.extern.log4j.Log4j2;
 
-
-
-@Controller
 @Log4j2
+@Controller
 public class HomeController {
 
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private EmailService emailService;
+
 
 	@GetMapping("/")
 	public ModelAndView showHome() {
@@ -43,54 +41,38 @@ public class HomeController {
 	public ModelAndView showLogin() {
 		return new ModelAndView("login");
 	}
-	
+
 	@GetMapping("/register")
 	public String showRegisterPage(Model model) {
 		model.addAttribute("registerModel", new AddUserRequest());
 		return "/register";
 	}
 
-	
 	@PostMapping("/register")
-	public String registerUser(@ModelAttribute("registerModel") AddUserRequest request, Model model) {
-
-		if (request.getPassword().equals(request.getPasswordConfirmation())) {
-
-			User user = UserMapper.registerRequestToUser(request);
-			String token = RandomToken.generateToken();
-
-			System.out.println("Token" + token);
-			user.setToken(token);
-
-			userService.saveUser(user);
-			Mail mail = new Mail();
-			mail.setTo(request.getEmail());
-			mail.setSubject("You are registrired in our shop <<Detal Auto>>!");
-			mail.setContent("Please verify your email adress by link: " + "http://localhost:8080/verify?token=" + token
-					+ "&userid=" + user.getId());
-			emailService.sendMessage(mail);
-
-		} else {
-			model.addAttribute("registerModel", new AddUserRequest());
+	public String registerUser(@Valid @ModelAttribute("registerModel") AddUserRequest request, BindingResult br) {
+		log.debug("Try to save user: " + request.getEmail());
+		if (br.hasErrors()) {
+			log.debug("Error hapened. " + request);
 			return "/register";
-		}
+			
+
+		} 
+		User user = UserMapper.registerRequestToUser(request);
+		String token = RandomToken.generateToken();
+		
+		System.out.println("Token" + token);
+		user.setToken(token);
+		
+		userService.saveUser(user);
+	//	Mail mail = new Mail();
+	//	mail.setTo(request.getEmail());
+	//	mail.setSubject("You are registrired in our shop <<Detal Auto>>!");
+	//	mail.setContent("Please verify your email adress by link: " + "http://localhost:8080/verify?token=" + token
+	//			+ "&userid=" + user.getId());
+	//	emailService.sendMessage(mail);
 		return "redirect:/";
-	
-//		if(br.hasErrors()) {
-//			 return "/register";
-//		} 
-//		User user = UserMapper.registerRequestToUser(request);
-//		String token = RandomToken.generateToken();
-//
-//		System.out.println("Token" + token);
-//		user.setToken(token);
-//		userService.saveUser(user);
-//		model.addAttribute("registerModel", new AddUserRequest());
-//		return "/register";
-	
+
 	}
-	
-	
 	
 	@GetMapping("/verify")
 	public String verifyEmail(@RequestParam("token") String token, @RequestParam("userid") String userId) {
@@ -113,11 +95,6 @@ public class HomeController {
 	@GetMapping("/payment-shipping")
 	public String showPayment() {
 		return "payment-shipping";
-	}
-	
-	@GetMapping("/dashboard")
-	public ModelAndView showDash() {
-		return new ModelAndView("dashboard");
 	}
 
 }

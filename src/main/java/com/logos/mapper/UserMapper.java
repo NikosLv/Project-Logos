@@ -54,8 +54,9 @@ public interface UserMapper {
 		if(request.getRole().equals(UserRole.ROLE_ADMIN)) {
 		user.setRole(UserRole.ROLE_ADMIN);
 		} else {
-				user.setRole(UserRole.ROLE_USER);
-			}
+			user.setRole(UserRole.ROLE_ADMIN);
+		}
+		
 		
 		userProfile.setId(request.getId());
 		userProfile.setFirstName(request.getFirstName());

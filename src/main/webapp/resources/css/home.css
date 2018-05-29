@@ -1,5 +1,10 @@
-body{
+body {
+	background-image: url("first.jpg");
+	background-repeat: inherit;
+	height: 500px;
+}
 
-	background-image:url("first.jpg");
-	background-repeat: inherit; 
-	height:500px;
+#home{
+	height:600px;
+	
+}

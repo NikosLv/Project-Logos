@@ -2,9 +2,12 @@ package com.logos.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,16 +60,27 @@ public class UserController {
 	}
 
 	@PostMapping("/edit")
-	public ModelAndView saveEditedUser(@ModelAttribute("editModel") EditRequest editRequest) {
+	public String saveEditedUser(@Valid @ModelAttribute("editModel") EditRequest editRequest, BindingResult br) {
 
-		try {
-			userService.updateUser(UserMapper.editReuqestToUser(editRequest));
-		} catch (Exception e) {
-			return new ModelAndView("user/edit", "error", "Oops ..Can't edit user");
+		if(br.hasErrors()) {
+			return "user/edit";
 		}
-		return new ModelAndView("redirect:/user/profile");
+		userService.updateUser(UserMapper.editReuqestToUser(editRequest));
+		return "redirect:/";
 
 	}	
+	
+//	@PostMapping("/edit")
+//	public ModelAndView saveEditedUser(@ModelAttribute("editModel") EditRequest editRequest) {
+//
+//		try {
+//			userService.updateUser(UserMapper.editReuqestToUser(editRequest));
+//		} catch (Exception e) {
+//			return new ModelAndView("user/edit", "error", "Oops ..Can't edit user");
+//		}
+//		return new ModelAndView("redirect:/user/profile");
+//
+//	}
 	
 	@GetMapping("/delete/{userId}")
 	public String deleteUserById(

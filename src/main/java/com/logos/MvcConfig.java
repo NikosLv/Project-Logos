@@ -21,7 +21,6 @@ import com.logos.formatter.BrandFormatter;
 
 @Configuration
 @EnableWebMvc
-@EnableJpaRepositories("com.logos.repository")
 @ComponentScan(basePackages = { "com.logos.controller" })
 public class MvcConfig implements WebMvcConfigurer {
 

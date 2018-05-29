@@ -4,12 +4,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/css/productsall.css">
+
 <!--  <link rel="stylesheet" href="../resources/css/products.css"> -->
 <title>Insert title here</title>
 </head>
 <body>
 
-	<c:url var="firstUrl" value="/product/productsall?page=0&size=1" />
+	<c:url var="firstUrl" value="/product/productsall?page=0&size=10" />
 	<!---------------------------------------------->
 	<c:url var="lastUrl"
 		value="/product/productsall?page=${ brandList.totalPages }" />
@@ -22,7 +24,7 @@
 
 	<div class="container">
 
-		<div class="row">
+		 <div class="row">
 			<ul class="pagination">
 				<c:choose>
 					<c:when test="${ currentIndex == 0 }">
@@ -59,13 +61,12 @@
 
 					<c:otherwise>
 						<li><a href="${ nextUrl }">&gt;</a></li>
-						<li><a href="${ lastUrl }">&gt;&gt;</a></li>
+						<li><a href="${ lastUrl }">&gt;&gt;</a></li> 
 					</c:otherwise>
 				</c:choose>
 			</ul>
-		</div>
-
-		<div class="row">
+		</div> 
+ 		 <div class="row">
 			<c:forEach items="${ brandListByPage }" var="brand">
 
 				<c:forEach items="${ brand.products }" var="product">
@@ -82,12 +83,17 @@
 								<div class="col-md-6 col-sm-6">
 									<p class="price" align="center">$${ product.price }</p>
 								</div>
+								
+								<sec:authorize access="isAuthenticated()">
+																
 								<div class="col-md-6 col-sm-6">
 									<a href="/order/add-order/${product.id}" target="_blank">
 										<button class="btn btn-info right" type="submit">BUY
 											ITEM</button>
 									</a>
 								</div>
+								</sec:authorize>
+								
 
 							</div>
 
@@ -96,14 +102,16 @@
 				</c:forEach>
 			</c:forEach>
 
-		</div>
-
+		</div>  
+			
+				
 	</div>
-	
 	<br>
-	<sec:authentication property="principal.username" var="username"/>
+ 
+<%--  	<sec:authentication property="principal.username" var="username"/>  
 	<a href="/order/all-order" target="_blank">My Orders</a>
 	<a href="/"><b>Back</b></a>
+ --%>
 	<br>
 </body>
 </html>

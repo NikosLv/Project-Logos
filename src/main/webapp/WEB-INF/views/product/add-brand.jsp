@@ -32,5 +32,5 @@
 </form:form>
 <br>
 
-<a href="/dashboard"><b>Back</b></a>
+<a href="/admin/dashboard"><b>Back</b></a>
 <br>

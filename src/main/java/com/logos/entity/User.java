@@ -42,6 +42,7 @@ public class User extends BaseEntity {
 	
 	@Size(min=5, max=30, message="Write your email between 5 and 30")
 	@Column(name = "email") 
+	@CheckIfEmailExists 
 	private String email;
 	
 	@NotNull(message = "Field password can't be null") 

@@ -47,6 +47,6 @@
     
 </table>
 
-<a href="/dashboard"><b>Back</b></a>
+<a href="/admin/dashboard"><b>Back</b></a>
 </body>
 </html>

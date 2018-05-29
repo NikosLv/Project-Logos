@@ -25,7 +25,7 @@ import com.logos.service.UserService;
 
 
 @Controller
-@RequestMapping("/order")
+//@RequestMapping("/order")
 public class OrderController {
 	
 	
@@ -41,19 +41,14 @@ public class OrderController {
 		this.productService=productService;
 	}
 	
-	@GetMapping("/add-order/{productId}")
-	public String showAddOrder(Model model,  @PathVariable("productId") int produtId) {  //Principal principal
-		
-		//String email = principal.getName();
-	//	User user = userService.findUserByEmail(email);
-		
+	@GetMapping("/order/add-order/{productId}")
+	public String showAddOrder(Model model,  @PathVariable("productId") int produtId) { 
 		model.addAttribute("orderModel", new Order());
-		//model.addAttribute("productList", productService.findAllProducts());
 		model.addAttribute("productModel", productService.findProductById(produtId));
 		return "order/add-order";
 	}
 	
-	@PostMapping("/add-order")
+	@PostMapping("/order/add-order")
 	public String saveOrder(
 			@ModelAttribute("orderModel") Order order, Principal principal, BindingResult br) {
 		if(br.hasErrors()) {
@@ -66,32 +61,42 @@ public class OrderController {
 		return "redirect:/product/productsall";                               
 	} 
 	
-	@GetMapping("/user-order")
-	public String showOrder(Model model, @PathVariable("orderId")int orderId) {
-		
-		
-		Order order = orderService.findOrderById(orderId);
-		model.addAttribute("userOrder", order);
-		
-		return "order/user-order";
+	@GetMapping("/order/orderId")
+	public String showOrder(Model model, Principal principal) {
+		String email = principal.getName();
+		User user = userService.findUserByEmail(email);
+		model.addAttribute("orderByUser", orderService.findOrderByUser(user));
+		model.addAttribute("title", "My Order Details");
+		return "order/orderId";
 	}
 	
-	
-	@GetMapping("/all-order")
-	public String showAllProductsall(Model model) {
-		model.addAttribute("orderList", orderService.findAllOrders());
-		return "order/all-order";
-	}
-	
-	@GetMapping("/orderId/{orderId}")
+	@GetMapping("/order/orderDet/{orderId}")
 	public String showProduct(Model model, @PathVariable("orderId") int orderId) {
 		
 		model.addAttribute("title", "Order Details");
 		Order order = orderService.findOrderById(orderId);
 		model.addAttribute("orderModel", order);
-		return "order/orderId";
+		return "order/orderDet";
 	}
-
+	
+		
+	@GetMapping("/order/all-order")
+	public String showAllProductsall(Model model) {
+		model.addAttribute("orderList", orderService.findAllOrders());
+		return "order/all-order";
+	}
+	
+	
+	@GetMapping("/order/email")
+	public String showEmail() {
+		return "order/email";
+	}
+	
+	
+	@GetMapping("/order/pay")
+	public String showPayment() {
+		return "order/pay";
+	}
 	
 	
 	

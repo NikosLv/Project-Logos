@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="../resources/css/products.css"> 
+<!-- <link rel="stylesheet" href="../resources/css/products.css">  -->
 
 <title>Products by page</title>
 </head>
@@ -79,12 +79,11 @@
 						<th>Unit</th>
 						<th>Availability</th>
 						<th>Producer</th>
-						<th>Photo</th>
 						<th>Price</th>
 						<th>Date download</th>
-						<th></th>
-        				<th></th>
-        				<th></th>
+						<th><span class="glyphicon glyphicon-exclamation-sign"></th>
+        				<th><span class="glyphicon glyphicon-pencil"></span></th>
+        				<th><span class="glyphicon glyphicon-erase"></span></th>
         				
 
 					</tr>
@@ -103,12 +102,11 @@
 								<td>${ product.unit }</td>
 								<td>${ product.availability }</td>
 								<td>${ product.producer }</td>
-								<td>${ product.imageUrl }</td>
 								<td>${ product.price }</td>
 								<td>${ product.dateDownload }</td>
 								<th><a href="/product/prodId/${product.id }">Detalis</a></th>
     							<th><a href="/product/edit-prod/${product.id }">Edit</a></th>
-        						<th><a href="/product/delete/${product.id}">Delete</a></th>
+        						<th><a href="/product/delete/${product.id}" >Delete</a></th>
         						
 							</tr>
 						</c:forEach>
@@ -117,7 +115,7 @@
 			</table>
 		</div>
 	</div>
-	<a href="/dashboard">Back</a>
+	<a href="/admin/dashboard">Back</a>
 	<br>
 </body>
 </html>

@@ -1,8 +1,9 @@
 <%@ include file="/WEB-INF/taglib.jsp"%>
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="../resources/css/footer.css">
 <legend>User Profile</legend>
 
-
+<div class="container" id="home">
 <table class="table table-bordered">
     <thead>
       <tr>
@@ -37,5 +38,7 @@
     	
     </tbody>
 </table>
+
 <a href="/user/edit"><h4 align="right">Edit Profile</h4></a><br><br>
-<a href="/dashboard"><b>Back</b></a>
+<a href="/admin/dashboard"><b>Back</b></a>
+</div>

@@ -1,3 +1,8 @@
+body{
+	background-image:url("products.jpg");
+	background-repeat: inherit; 
+}
+
 .container {
 	width: 1200px;
 	border-radius:30px;
